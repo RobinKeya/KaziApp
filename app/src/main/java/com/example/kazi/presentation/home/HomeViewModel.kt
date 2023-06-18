@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kazi.data.WorkRepository
+import com.example.kazi.data.local.PartialWork
 import com.example.kazi.data.local.Work
 import com.example.kazi.di.MainDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +25,8 @@ class HomeViewModel @Inject constructor(
         )
     )
     val state get()=_state
+    private val _work = mutableStateOf(Work(0,"",""))
+    val work get() = _work
     init {
         viewModelScope.launch(dispatcher) {
            val work = getAllWork()
@@ -39,4 +42,23 @@ class HomeViewModel @Inject constructor(
      fun addWork(work: Work) = viewModelScope.launch(dispatcher) {
          repository.addWork(work = work)
      }
+
+    fun deleteAll() = viewModelScope.launch(dispatcher) {
+        repository.deleteAll()
+    }
+
+    fun updateWork(work: PartialWork)= viewModelScope.launch(dispatcher) {
+        repository.updateWork(work)
+    }
+    fun deleteWork(id: Int)= viewModelScope.launch(dispatcher) {
+        repository.deleteWork(id)
+    }
+    fun getSingleWork(id: Int) = viewModelScope.launch (dispatcher){
+        val singleWork = repository.getSingleWork(id)
+        _work.value = _work.value.copy(
+            id= singleWork.id,
+            title = singleWork.title,
+            description = singleWork.description
+        )
+    }
 }

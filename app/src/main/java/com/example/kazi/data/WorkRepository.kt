@@ -1,5 +1,6 @@
 package com.example.kazi.data
 
+import com.example.kazi.data.local.PartialWork
 import com.example.kazi.data.local.Work
 import com.example.kazi.data.local.WorkDao
 import com.example.kazi.di.IODispatcher
@@ -20,6 +21,28 @@ class WorkRepository @Inject constructor(
     suspend fun addWork(work: Work){
         withContext(dispatcher){
             dao.addWork(work)
+        }
+    }
+
+    suspend fun deleteAll(){
+        withContext(dispatcher){
+            dao.deleteAll()
+        }
+    }
+
+    suspend fun deleteWork(id: Int){
+        withContext(dispatcher){
+            dao.deleteWork(id)
+        }
+    }
+    suspend fun updateWork(work: PartialWork){
+        withContext(dispatcher){
+            dao.update(work)
+        }
+    }
+    suspend fun getSingleWork(id: Int): Work{
+        return withContext(dispatcher){
+            return@withContext dao.getSingleWork(id)
         }
     }
 }

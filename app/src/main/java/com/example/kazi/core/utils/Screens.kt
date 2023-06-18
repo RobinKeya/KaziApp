@@ -4,4 +4,5 @@ object Screens {
     const val Home = "home"
     const val Update = "update"
     const val AddWork = "add"
+    const val Details = "details"
 }
