@@ -74,10 +74,13 @@ fun WorkItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column() {
-                    Text(text = work.title)
-                    Text(text = work.description)
+                    Text(text = work.title,style = MaterialTheme.typography.h2)
+                    Text(text = work.description.trim(),style = MaterialTheme.typography.body1)
                 }
-                work.date?.let { Text(text = it.format(DateTimeFormatter.ofPattern("dd/mm/yyyy"))) }
+                work.date?.let { Text(
+                    text = it.format(DateTimeFormatter.ofPattern("yyyy/mm/dd")),
+                    style = MaterialTheme.typography.body1
+                ) }
             }
         }
     }

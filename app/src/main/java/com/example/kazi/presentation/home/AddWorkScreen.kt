@@ -20,8 +20,8 @@ fun AddWorkScreen(navController: NavController,addWork:(work: Work)->Unit) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                Text(text = "Add Work")
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalArrangement = Arrangement.Center) {
+                Text(text = "Add Work",style = MaterialTheme.typography.h1)
             }
         }
     ) {
@@ -61,8 +61,9 @@ fun AddWorkScreen(navController: NavController,addWork:(work: Work)->Unit) {
                         inclusive= true
                     }
                 }
-            }) {
-                Text(text = "Add")
+            },
+            modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                Text(text = "Add",style = MaterialTheme.typography.h2)
             }
         }
     }

@@ -48,16 +48,23 @@ fun UpdateScreen(
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            val work = PartialWork(id = updateViewModel.work.value.id,title = updateViewModel.title, description = updateViewModel.description)
-            OutlinedButton(onClick = {
+            val work = PartialWork(
+                id = updateViewModel.work.value.id,
+                title = updateViewModel.title,
+                description = updateViewModel.description
+            )
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth().padding(16.dp)
+                ,onClick = {
                 update(work)
                 navController.navigate(Screens.Home){
                     popUpTo(Screens.Home){
                         inclusive= true
                     }
                 }
-            }) {
-                Text(text = "Add")
+            }
+            ) {
+                Text(text = "Update",style = MaterialTheme.typography.h2)
             }
         }
     }
