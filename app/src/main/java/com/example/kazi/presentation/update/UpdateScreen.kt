@@ -1,4 +1,4 @@
-package com.example.kazi.presentation.home
+package com.example.kazi.presentation.update
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
@@ -16,15 +16,11 @@ import com.example.kazi.data.local.PartialWork
 @Composable
 fun UpdateScreen(
     navController: NavController,
-    homeViewModel: HomeViewModel,
+    updateViewModel: UpdateViewModel,
     update: (work: PartialWork) -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
-    val work = homeViewModel.work.value
-    var title by remember{ mutableStateOf("${work.title}") }
-    var description by remember {
-        mutableStateOf("${work.description}")
-    }
+
     Scaffold(
         scaffoldState= scaffoldState
     ) {
@@ -32,8 +28,8 @@ fun UpdateScreen(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-            OutlinedTextField(value = title, onValueChange = {value->
-                title = value
+            OutlinedTextField(value = updateViewModel.title, onValueChange = {value->
+                updateViewModel.title = value
             },
                 placeholder = { Text(text = "Title") },
                 maxLines = 1,
@@ -42,8 +38,8 @@ fun UpdateScreen(
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            OutlinedTextField(value = description, onValueChange = {value->
-                description = value
+            OutlinedTextField(value = updateViewModel.description, onValueChange = {value->
+                updateViewModel.description = value
             },
                 placeholder = { Text(text = "Description") },
                 maxLines = 3,
@@ -52,7 +48,7 @@ fun UpdateScreen(
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            val work = PartialWork(0,title = title, description = description)
+            val work = PartialWork(id = updateViewModel.work.value.id,title = updateViewModel.title, description = updateViewModel.description)
             OutlinedButton(onClick = {
                 update(work)
                 navController.navigate(Screens.Home){

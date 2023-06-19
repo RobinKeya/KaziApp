@@ -16,7 +16,8 @@ import com.example.kazi.presentation.home.HomeViewModel
 fun WorkDetailsScreen(
     workDetailsViewModel: WorkDetailsViewModel,
     navController: NavController,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
+    toUpdate: (id: Int)->Unit
 ) {
     val scaffoldState = rememberScaffoldState()
     Scaffold(scaffoldState = scaffoldState) {
@@ -26,11 +27,18 @@ fun WorkDetailsScreen(
                 Text(text = workDetailsViewModel.state.value.description)
 
                 Row() {
-                    OutlinedButton(onClick = { homeViewModel.deleteWork(workDetailsViewModel.state.value.id) }) {
+                    OutlinedButton(onClick = {
+                        homeViewModel.deleteWork(workDetailsViewModel.state.value.id)
+                        navController.navigate(Screens.Home){
+                            popUpTo(Screens.Home){
+                                inclusive= true
+                            }
+                        }
+                    }) {
                         Text(text ="Delete")
                     }
                     OutlinedButton(onClick = {
-                        navController.navigate(Screens.Update)
+                        toUpdate(workDetailsViewModel.state.value.id)
                     }) {
                         Text(text = "Update")
                     }

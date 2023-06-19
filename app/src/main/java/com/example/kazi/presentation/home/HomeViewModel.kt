@@ -46,19 +46,7 @@ class HomeViewModel @Inject constructor(
     fun deleteAll() = viewModelScope.launch(dispatcher) {
         repository.deleteAll()
     }
-
-    fun updateWork(work: PartialWork)= viewModelScope.launch(dispatcher) {
-        repository.updateWork(work)
-    }
     fun deleteWork(id: Int)= viewModelScope.launch(dispatcher) {
         repository.deleteWork(id)
-    }
-    fun getSingleWork(id: Int) = viewModelScope.launch (dispatcher){
-        val singleWork = repository.getSingleWork(id)
-        _work.value = _work.value.copy(
-            id= singleWork.id,
-            title = singleWork.title,
-            description = singleWork.description
-        )
     }
 }

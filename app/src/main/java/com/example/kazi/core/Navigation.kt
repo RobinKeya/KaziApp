@@ -13,7 +13,8 @@ import com.example.kazi.presentation.details.WorkDetailsViewModel
 import com.example.kazi.presentation.home.AddWorkScreen
 import com.example.kazi.presentation.home.HomeScreen
 import com.example.kazi.presentation.home.HomeViewModel
-import com.example.kazi.presentation.home.UpdateScreen
+import com.example.kazi.presentation.update.UpdateScreen
+import com.example.kazi.presentation.update.UpdateViewModel
 
 @Composable
 fun Navigation(navHostController: NavHostController) {
@@ -35,7 +36,9 @@ fun Navigation(navHostController: NavHostController) {
                 workDetailsViewModel = detailsViewModel,
                 navController = navHostController,
                 homeViewModel = homeViewModel
-            )
+            ){id ->
+                navHostController.navigate("${Screens.Update}/${id}")
+            }
         }
         composable(route= Screens.AddWork){
             val homeViewModel : HomeViewModel = hiltViewModel()
@@ -44,13 +47,18 @@ fun Navigation(navHostController: NavHostController) {
             }
         }
 
-        composable(route = Screens.Update){
-            val homeViewModel : HomeViewModel = hiltViewModel()
+        composable(route = "${Screens.Update}/{id}",
+            arguments = listOf(navArgument(
+            name = "id"
+        ){
+            type = NavType.IntType
+        })){
+            val updateViewModel : UpdateViewModel = hiltViewModel()
             UpdateScreen(
                 navController = navHostController,
-                homeViewModel =homeViewModel,
+                updateViewModel = updateViewModel
             ){
-                homeViewModel.updateWork(it)
+                updateViewModel.updateWork(it)
             }
         }
     }
