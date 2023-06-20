@@ -78,7 +78,7 @@ fun WorkItem(
                     Text(text = work.description.trim(),style = MaterialTheme.typography.body1)
                 }
                 work.date?.let { Text(
-                    text = it.format(DateTimeFormatter.ofPattern("yyyy/mm/dd")),
+                    text = it.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
                     style = MaterialTheme.typography.body1
                 ) }
             }
