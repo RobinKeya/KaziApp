@@ -1,10 +1,7 @@
 package com.example.kazi.data.local
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
 import java.time.LocalDateTime
 
 @Entity(tableName = "work")

@@ -42,7 +42,7 @@ fun Navigation(navHostController: NavHostController) {
         }
         composable(route= Screens.AddWork){
             val homeViewModel : HomeViewModel = hiltViewModel()
-            AddWorkScreen(navController = navHostController, ){
+            AddWorkScreen(navController = navHostController ){
                 homeViewModel.addWork(it)
             }
         }

@@ -10,8 +10,8 @@ import com.example.kazi.di.MainDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
 @HiltViewModel
 class WorkDetailsViewModel @Inject constructor(
     @MainDispatcher private val dispatcher: CoroutineDispatcher,
@@ -21,7 +21,7 @@ class WorkDetailsViewModel @Inject constructor(
     private val _state = mutableStateOf(Work(0,"",""))
     val state get() = _state
     init {
-        val id = stateHandle.get<Int?>("id")?:0
+        val id = stateHandle["id"] ?:0
         viewModelScope.launch(dispatcher) {
             val work = getSingleCharacter(id)
             _state.value = _state.value.copy(
@@ -32,7 +32,7 @@ class WorkDetailsViewModel @Inject constructor(
         }
 
     }
-    suspend fun getSingleCharacter(id: Int): Work {
+    private suspend fun getSingleCharacter(id: Int): Work {
         return repository.getSingleWork(id)
     }
 }

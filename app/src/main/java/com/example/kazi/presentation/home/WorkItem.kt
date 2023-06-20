@@ -73,7 +73,7 @@ fun WorkItem(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column() {
+                Column {
                     Text(text = work.title,style = MaterialTheme.typography.h2)
                     Text(text = work.description.trim(),style = MaterialTheme.typography.body1)
                 }

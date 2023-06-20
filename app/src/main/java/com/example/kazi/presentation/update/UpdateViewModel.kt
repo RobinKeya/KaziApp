@@ -2,7 +2,6 @@ package com.example.kazi.presentation.update
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -26,11 +25,11 @@ class UpdateViewModel @Inject constructor(
     val work get() = _work
 
 
-    var title by mutableStateOf("${work.value.title}")
-    var description by mutableStateOf("${work.value.description}")
+    var title by mutableStateOf("")
+    var description by mutableStateOf("")
 
     init {
-        val id = savedStateHandle.get<Int?>("id")?:0
+        val id = savedStateHandle["id"] ?:0
         viewModelScope.launch(dispatcher) {
             val work = repository.getSingleWork(id)
             _work.value = _work.value.copy(
