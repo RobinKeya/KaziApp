@@ -67,7 +67,7 @@ fun HomeScreen(
                 .padding(top = 16.dp)
         ) {
             LazyColumn(contentPadding = PaddingValues(4.dp)){
-                items(works.value){ work->
+                items(works.value,{work : Work->work.id}){ work->
                         WorkItem(
                             work = work,
                             onCardClick = { id -> onCarClick(id) },
